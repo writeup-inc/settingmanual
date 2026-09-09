@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="スーパーマネージャーをお使いいただくための初期設定マニュアルです。拡張機能の追加から、商談同席・文字起こし・商談ログ保存までを動画つきで案内します。">
+<title>スーパーマネージャー 初期設定マニュアル｜株式会社ライトアップ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&amp;family=Noto+Sans+JP:wght@400;700;900&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101214;
+  --paper:#FFFFFF;
+  --g90:#1F2225;
+  --g60:#5F666C;
+  --g40:#949A9F;
+  --g20:#D7DBDE;
+  --g08:#EBEEF0;
+  --g04:#F5F7F8;
+  --accent:#1F4E66;
+  --accent-soft:#E8F0F4;
+  --done:#2F6B4F;
+  --w:1080px;
+  --jp:"Noto Sans JP",sans-serif;
+  --en:"Inter",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#F2F4F5;
+    --paper:#101214;
+    --g90:#E3E6E8;
+    --g60:#A2A9AF;
+    --g40:#71787E;
+    --g20:#333A3F;
+    --g08:#20252A;
+    --g04:#181C20;
+    --accent:#8FC4DD;
+    --accent-soft:#17262E;
+    --done:#7EC8A2;
+  }
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{
+  font-family:var(--jp);font-weight:400;
+  color:var(--ink);background:var(--paper);
+  line-height:1.95;font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 28px}
+a{color:inherit}
+
+/* header */
+.hd{position:fixed;top:0;left:0;right:0;z-index:50;
+  background:var(--paper);border-bottom:1px solid var(--g08)}
+.hd .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+.hd .lg{font-size:13px;font-weight:900;letter-spacing:.08em;white-space:nowrap}
+.hd .lg span{font-family:var(--en)}
+.hd .mt{font-family:var(--en);font-size:11px;font-weight:700;color:var(--g60);letter-spacing:.14em}
+
+/* hero */
+.hero{padding:112px 0 56px;border-bottom:1px solid var(--ink)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.9fr);gap:52px;align-items:start}
+.eyebrow{font-family:var(--en);font-size:11px;font-weight:900;letter-spacing:.18em;
+  color:var(--g60);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--ink)}
+.hby{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.hby-mark{width:56px;height:56px;flex:0 0 auto;border:1px solid var(--g20);background:var(--g04);
+  display:flex;align-items:center;justify-content:center}
+.hby-mark svg{width:30px;height:30px;color:var(--accent)}
+.hby-txt{font-size:12px;color:var(--g60);line-height:1.65}
+.hby-txt b{display:block;font-size:15px;font-weight:900;color:var(--ink);margin-bottom:2px}
+.hero h1{font-weight:900;font-size:clamp(26px,4.6vw,50px);line-height:1.2;letter-spacing:-.02em;margin-bottom:24px}
+.hero .lead{font-size:clamp(14.5px,1.5vw,17px);line-height:2.05;max-width:640px;color:var(--g90)}
+.hero .lead + .lead{margin-top:14px}
+.hero .lead b{font-weight:900}
+
+/* checklist card */
+.card{border:1px solid var(--g20);background:var(--g04)}
+.card-h{padding:16px 20px;border-bottom:1px solid var(--g20);display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.card-h b{font-size:14px;font-weight:900;letter-spacing:.02em}
+.card-h .cnt{font-family:var(--en);font-size:11px;font-weight:900;color:var(--g60);letter-spacing:.06em}
+.bar{height:4px;background:var(--g20)}
+.bar i{display:block;height:100%;width:0;background:var(--done);transition:width .35s cubic-bezier(.2,.7,.2,1)}
+.card ul{list-style:none;padding:8px 8px 12px}
+.card label{display:flex;align-items:flex-start;gap:11px;padding:11px 12px;cursor:pointer;
+  font-size:13.5px;line-height:1.6;transition:background .2s}
+.card label:hover{background:var(--accent-soft)}
+.card input{appearance:none;-webkit-appearance:none;width:18px;height:18px;flex:0 0 auto;margin-top:3px;
+  border:1.5px solid var(--g40);background:var(--paper);cursor:pointer;position:relative}
+.card input:checked{background:var(--done);border-color:var(--done)}
+.card input:checked::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;
+  border:solid #FFFFFF;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.card input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.card label span{flex:1;min-width:0}
+.card label em{display:block;font-style:normal;font-family:var(--en);font-size:10px;font-weight:900;
+  letter-spacing:.1em;color:var(--g40);margin-bottom:1px}
+.card input:checked + span{color:var(--g40);text-decoration:line-through;text-decoration-thickness:1px}
+.card-f{padding:12px 20px 16px;border-top:1px solid var(--g20);font-size:11.5px;color:var(--g60);line-height:1.7}
+
+/* toc */
+.toc{border-bottom:1px solid var(--g08);padding:22px 0}
+.toc ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.toc a{display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border:1px solid var(--g20);
+  text-decoration:none;font-size:13px;font-weight:700;transition:.2s}
+.toc a:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.toc a i{font-family:var(--en);font-style:normal;font-size:10px;font-weight:900;color:var(--g40);letter-spacing:.06em}
+.toc a:hover i{color:var(--paper)}
+
+/* sections */
+.sec{padding:72px 0;border-bottom:1px solid var(--g08)}
+.sec:last-of-type{border-bottom:0}
+.sec-head{display:flex;gap:20px;align-items:flex-start;margin-bottom:32px}
+.sec-no{font-family:var(--en);font-size:12px;font-weight:900;letter-spacing:.1em;color:var(--paper);
+  background:var(--ink);padding:6px 11px;flex:0 0 auto;margin-top:6px}
+.sec-head h2{font-size:clamp(21px,2.9vw,32px);font-weight:900;line-height:1.4;letter-spacing:-.01em}
+.sec-head .time{display:inline-block;margin-top:10px;font-size:11.5px;font-weight:900;letter-spacing:.06em;
+  color:var(--accent);background:var(--accent-soft);padding:4px 10px}
+.sec-lead{font-size:15px;line-height:2.05;color:var(--g90);max-width:720px;margin-bottom:32px}
+
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:40px;align-items:start}
+
+/* video */
+.vid{border:1px solid var(--g20);background:#000000;position:relative;aspect-ratio:16/9}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid-cap{margin-top:10px;font-size:11.5px;color:var(--g60);letter-spacing:.02em}
+
+/* steps */
+.steps{list-style:none;counter-reset:st}
+.steps li{counter-increment:st;position:relative;padding:0 0 26px 44px;border-left:1px solid var(--g20);margin-left:12px}
+.steps li:last-child{border-left-color:transparent;padding-bottom:0}
+.steps li::before{content:counter(st);position:absolute;left:-13px;top:0;width:26px;height:26px;
+  background:var(--paper);border:1.5px solid var(--ink);font-family:var(--en);font-size:11px;font-weight:900;
+  display:flex;align-items:center;justify-content:center}
+.steps b{display:block;font-size:15px;font-weight:900;line-height:1.6;margin-bottom:5px}
+.steps p{font-size:13.5px;line-height:1.95;color:var(--g60)}
+
+/* link block */
+.lk{display:flex;align-items:center;gap:13px;padding:15px 17px;border:1px solid var(--g20);
+  background:var(--g04);text-decoration:none;transition:.2s;margin-top:14px}
+.lk:hover{border-color:var(--ink);background:var(--paper)}
+.lk svg{width:19px;height:19px;flex:0 0 auto;color:var(--accent)}
+.lk span{flex:1;min-width:0}
+.lk b{display:block;font-size:13.5px;font-weight:900;line-height:1.5}
+.lk em{display:block;font-style:normal;font-size:11.5px;color:var(--g60);line-height:1.6;margin-top:2px;
+  word-break:break-all}
+.lk .arw{width:15px;height:15px;color:var(--g40)}
+
+.note{margin-top:16px;padding:14px 17px;border-left:3px solid var(--accent);background:var(--accent-soft);
+  font-size:13px;line-height:1.9}
+.note b{font-weight:900}
+
+/* contact */
+.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.contact .lk{margin-top:0}
+
+/* footer */
+.ft{padding:44px 0 60px;border-top:1px solid var(--ink)}
+.ft-in{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap}
+.ft b{font-size:13px;font-weight:900;letter-spacing:.06em}
+.ft span{font-size:11.5px;color:var(--g60);letter-spacing:.04em}
+
+@media (max-width:880px){
+  .hero{padding:96px 0 44px}
+  .hero-grid,.cols{grid-template-columns:minmax(0,1fr);gap:32px}
+  .sec{padding:56px 0}
+  .sec-head{gap:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .bar i{transition:none}
+}
+@media print{
+  .hd,.toc,.vid{display:none}
+  body{font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <div class="lg"><span>WRITEUP</span>／スーパーマネージャー</div>
+    <div class="mt">SETUP MANUAL</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">SUPER MANAGER ／ 初期設定マニュアル</div>
+        <div class="hby">
+          <div class="hby-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l7 3v5c0 4.2-2.9 7.7-7 8.9-4.1-1.2-7-4.7-7-8.9V6l7-3z"/><path d="M9 12l2.2 2.2L15.5 10"/>
+            </svg>
+          </div>
+          <div class="hby-txt">
+            <b>スーパーマネージャー</b>
+            商談に同席して、営業をサポートするAI
+          </div>
+        </div>
+        <h1>はじめまして。<br>スーパーマネージャーです。</h1>
+        <p class="lead">あなたの商談に同席させていただいたり、営業面のサポートができればと思います。まずはお手数なのですが……こちらご確認ください。これからよろしくお願いします。</p>
+        <p class="lead">このページでは、<b>拡張機能の追加から、商談同席・文字起こし・商談ログの保存まで</b>を順番にご案内します。上から順に進めていただければ大丈夫です。</p>
+      </div>
+
+      <div class="card">
+        <div class="card-h">
+          <b>設定の進みぐあい</b>
+          <span class="cnt" id="cnt">0 / 4</span>
+        </div>
+        <div class="bar"><i id="bar"></i></div>
+        <ul>
+          <li><label><input type="checkbox" data-k="s1"><span><em>STEP 01 ／ 5-10 MIN</em>初期設定（拡張機能の追加とログイン）</span></label></li>
+          <li><label><input type="checkbox" data-k="s2"><span><em>STEP 02 ／ 15 MIN</em>商談同席機能の設定</span></label></li>
+          <li><label><input type="checkbox" data-k="s3"><span><em>STEP 03</em>文字起こし機能の使い方を確認</span></label></li>
+          <li><label><input type="checkbox" data-k="s4"><span><em>STEP 04</em>Googleドライブへの商談ログ保存</span></label></li>
+        </ul>
+        <div class="card-f">チェックはこの端末のブラウザにのみ保存されます。中断しても、同じ端末なら続きから進められます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="toc" aria-label="目次">
+  <div class="wrap">
+    <ol>
+      <li><a href="#intro"><i>00</i>自己紹介</a></li>
+      <li><a href="#setup"><i>01</i>初期設定</a></li>
+      <li><a href="#meeting"><i>02</i>商談同席機能の設定</a></li>
+      <li><a href="#transcript"><i>03</i>文字起こし機能の使い方</a></li>
+      <li><a href="#drive"><i>04</i>商談ログをためる</a></li>
+      <li><a href="#help"><i>05</i>マニュアル・お問い合わせ</a></li>
+    </ol>
+  </div>
+</nav>
+
+<main>
+
+<section class="sec" id="intro">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-no">00</div>
+      <div><h2>自己紹介</h2></div>
+    </div>
+    <p class="sec-lead">まずは私の自己紹介をさせてください。どんなことができるAIなのかは、サービスLPと紹介動画にまとめてあります。設定を始める前に目を通していただけると、このあとの手順の意味が分かりやすくなります。</p>
+    <a class="lk" href="https://jwriteup.notion.site/3adc3c73bde680c0a67ccc63dece4714?pvs=74" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M10 9.2l5 2.8-5 2.8V9.2z"/></svg>
+      <span>
+        <b>スーパーマネージャーとは？（サービスLP・紹介動画）</b>
+        <em>jwriteup.notion.site ／ サービス紹介ページ</em>
+      </span>
+      <svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<section class="sec" id="setup">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-no">01</div>
+      <div>
+        <h2>初期設定</h2>
+        <div class="time">所要時間：5〜10分</div>
+      </div>
+    </div>
+    <p class="sec-lead">みなさんの営業をサポートさせていただくにあたり、ちょっとした準備をよろしくお願いします。多めに見積もっても、10分程度で終わるかと思います。</p>
+    <div class="cols">
+      <div>
+        <ol class="steps">
+          <li>
+            <b>Chromeの拡張機能を追加する</b>
+            <p>下のリンクからChromeウェブストアを開き、「Chromeに追加」を押してください。</p>
+          </li>
+          <li>
+            <b>ブラウザ右上の拡張機能アイコンをクリック</b>
+            <p>追加が完了したら、ブラウザ右上のパズルのアイコンから、スーパーマネージャーを開きます。ピン留めしておくと、毎回の商談で探さずに済みます。</p>
+          </li>
+          <li>
+            <b>Googleアカウントでログイン</b>
+            <p>ふだんの業務で使っているGoogleアカウントでログインしてください。ここまでで初期設定は完了です。</p>
+          </li>
+        </ol>
+        <a class="lk" href="https://chromewebstore.google.com/detail/cjckgaiphcgnpancmnaccfbodompjldc?hl=ja" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h9M12 8a4 4 0 00-3.5 5.9M12 8a4 4 0 013.5 6M8.5 13.9L4 6.5M15.5 14L11 21.9"/></svg>
+          <span>
+            <b>Chrome拡張機能をダウンロード</b>
+            <em>chromewebstore.google.com ／ スーパーマネージャー</em>
+          </span>
+          <svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </a>
+        <div class="note">Chrome以外のブラウザでは拡張機能を追加できません。商談で使う端末のChromeで設定してください。</div>
+      </div>
+      <div>
+        <div class="vid">
+          <iframe src="https://player.vimeo.com/video/1210154187?h=97464a17d2&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" title="初期設定の説明動画" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <p class="vid-cap">説明動画：初期設定の手順（再生ボタンを押してください）</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="meeting">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-no">02</div>
+      <div>
+        <h2>商談同席機能の設定</h2>
+        <div class="time">所要時間：15分</div>
+      </div>
+    </div>
+    <p class="sec-lead">商談同席時のアドバイス生成の設定について、西村からご説明させていただきます。みなさんをうまくサポートできたらよいのですが……商談を進めやすいアドバイスのルールを教えてください。</p>
+    <div class="cols">
+      <div>
+        <ol class="steps">
+          <li>
+            <b>商談QAスプレッドシートをコピーする</b>
+            <p>下のリンクを開き、ファイル &gt; コピーを作成 から、ご自身のドライブへコピーしてお使いください。</p>
+          </li>
+          <li>
+            <b>よくある質問と、返し方を書く</b>
+            <p>商談で実際に聞かれる質問と、そのときの答え方を書いていきます。ここに書いていただいた内容をもとに、商談中のアドバイスを組み立てます。</p>
+          </li>
+          <li>
+            <b>アドバイスのルールを決める</b>
+            <p>触れてほしくない話題や、必ず伝えたいことがあれば書いてください。書き方のこつは動画のなかでご説明しています。</p>
+          </li>
+        </ol>
+        <a class="lk" href="https://docs.google.com/spreadsheets/d/1ElpD9JLSgeG_S3WAAjqPa0cCtv9OolSy5AZh7OSSEI0/edit?usp=sharing" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M4 9h16M4 15h16M10 3v18"/></svg>
+          <span>
+            <b>商談QAスプレッドシート</b>
+            <em>docs.google.com ／ コピーしてご使用ください</em>
+          </span>
+          <svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </a>
+        <div class="note"><b>コピーしてからご記入ください。</b>共有されている元のシートに直接書き込むと、ほかの方の内容と混ざってしまいます。</div>
+      </div>
+      <div>
+        <div class="vid">
+          <iframe src="https://player.vimeo.com/video/1210162567?h=99c4188548&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" title="商談同席機能の設定 説明動画" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <p class="vid-cap">説明動画：商談同席時のアドバイス生成の設定</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="transcript">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-no">03</div>
+      <div><h2>文字起こし機能の使い方</h2></div>
+    </div>
+    <p class="sec-lead">初期設定が終わっていれば、特に追加の設定は不要なのですが……いろいろと心配なので、同席した商談の文字起こしをしています。お役に立てたら嬉しいです。</p>
+    <div class="cols">
+      <div>
+        <ol class="steps">
+          <li>
+            <b>追加の設定は不要です</b>
+            <p>STEP 01 の初期設定が済んでいれば、同席した商談の文字起こしはそのまま行われます。</p>
+          </li>
+          <li>
+            <b>商談のあとに読み返す</b>
+            <p>言った・言わないの確認や、次回の準備、社内共有にお使いください。どこから開いて、どう読むのかは動画でご説明しています。</p>
+          </li>
+        </ol>
+      </div>
+      <div>
+        <div class="vid">
+          <iframe src="https://player.vimeo.com/video/1210154522?h=65bb885463&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" title="文字起こし機能の使い方 説明動画" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <p class="vid-cap">説明動画：文字起こし機能の使い方</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="drive">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-no">04</div>
+      <div><h2>Googleドライブに商談ログをためる方法</h2></div>
+    </div>
+    <p class="sec-lead">商談のログをためておくと、商談の分析ができたり、活躍する営業マンのコピーAIの材料になったり……何かといいことがきっとあるはずです。ぜひこちらも設定してみてください。</p>
+    <div class="cols">
+      <div>
+        <ol class="steps">
+          <li>
+            <b>保存先のGoogleドライブを決める</b>
+            <p>商談ログをためておくフォルダを用意します。チームで見るなら、共有ドライブが分かりやすいです。</p>
+          </li>
+          <li>
+            <b>拡張機能から保存先を設定する</b>
+            <p>設定のしかたは動画のとおりです。設定が済むと、商談ごとのログがドライブにたまっていきます。</p>
+          </li>
+        </ol>
+        <div class="note">商談ログにはお客様との会話が含まれます。保存先フォルダの共有範囲は、社内のルールに沿って設定してください。</div>
+      </div>
+      <div>
+        <div class="vid">
+          <iframe src="https://player.vimeo.com/video/1224903508?h=072022134a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" title="Googleドライブに商談ログをためる方法 説明動画" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <p class="vid-cap">説明動画：Googleドライブへの商談ログ保存</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="help">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-no">05</div>
+      <div><h2>マニュアル・お問い合わせ</h2></div>
+    </div>
+    <p class="sec-lead">その他、ご不明点がございましたら、まずはマニュアルをご確認ください。それでも解決しない場合は、担当の西村までご連絡ください。</p>
+    <div class="contact">
+      <a class="lk" href="https://jwriteup.notion.site/39ec3c73bde680228788d3fe5ac0c33e?pvs=74" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h9l5 5v12H5z"/><path d="M14 3.5v5h5"/><path d="M8.5 13h7M8.5 16.5h5"/></svg>
+        <span>
+          <b>マニュアルを見る</b>
+          <em>スーパーマネージャー 案内ページ（Notion）</em>
+        </span>
+        <svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="lk" href="https://jwriteup.notion.site/39ec3c73bde680228788d3fe5ac0c33e?pvs=74" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v13H4z"/><path d="M4 6.5l8 6 8-6"/></svg>
+        <span>
+          <b>担当者（西村）へ問い合わせる</b>
+          <em>案内ページ内のお問い合わせ先から</em>
+        </span>
+        <svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ft">
+  <div class="wrap ft-in">
+    <b>株式会社ライトアップ ／ スーパーマネージャー</b>
+    <span>初期設定マニュアル</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var K = "sm-setup-progress";
+  var boxes = [].slice.call(document.querySelectorAll(".card input[type=checkbox]"));
+  var bar = document.getElementById("bar");
+  var cnt = document.getElementById("cnt");
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(K) || "{}") || {}; } catch (e) { saved = {}; }
+  function render(){
+    var done = boxes.filter(function(b){ return b.checked; }).length;
+    bar.style.width = (done / boxes.length * 100) + "%";
+    cnt.textContent = done + " / " + boxes.length;
+  }
+  boxes.forEach(function(b){
+    if (saved[b.dataset.k]) b.checked = true;
+    b.addEventListener("change", function(){
+      saved[b.dataset.k] = b.checked;
+      try { localStorage.setItem(K, JSON.stringify(saved)); } catch (e) {}
+      render();
+    });
+  });
+  render();
+})();
+</script>
+
+</body>
+</html>
