@@ -12,6 +12,8 @@
 | フォルダ | ページ | 公開URL |
 |---|---|---|
 | `supermanager/` | スーパーマネージャー 初期設定マニュアル | https://writeup-inc.github.io/settingmanual/supermanager/ |
+| `worklog-insight/` | ワークログ・インサイト 初期設定ガイド | https://writeup-inc.github.io/settingmanual/worklog-insight/ |
+| `elliot/` | Elliot 初期設定ガイド | https://writeup-inc.github.io/settingmanual/elliot/ |
 
 ## 追加のしかた
 
